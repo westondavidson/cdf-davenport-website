@@ -1,7 +1,6 @@
 ---
-title: "Jane Smith"
-role: "Worship Director"
-photo: "/uploads/jane.jpg"
+title: Dory Gomez
+role: Worship Director
+photo: ""
 ---
-
-Jane's heart is to lead people into joyful and reverent worship of our great God.
+Dory's heart is to lead people into joyful and reverent worship of our great God.
