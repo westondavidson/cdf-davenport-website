@@ -132,3 +132,5 @@ collections:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
           - { label: "Form Heading", name: "form_heading", widget: "string", required: false }
+
+# Last updated: Force reload of config

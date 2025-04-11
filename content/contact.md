@@ -8,5 +8,6 @@ address: |
   **Grace Church**  
   123 Faith Street  
   Port Orange, FL 32129
+form_heading: "Send Us a Message"
 ---
 testing updating the contact info manually
