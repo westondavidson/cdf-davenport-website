@@ -125,4 +125,10 @@ collections:
   - name: "contact"
     label: "Contact Page"
     files:
-      -
+      - file: "content/contact.md"
+        label: "Contact Page"
+        name: "contact"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Form Heading", name: "form_heading", widget: "string", required: false }
