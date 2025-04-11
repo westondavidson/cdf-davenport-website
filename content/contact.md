@@ -2,12 +2,13 @@
 title: Contact Us
 layout: contact
 type: contact
-email: info@gracechurch.com
+email: iglesiacdfe@outlook.com
 phone: (386) 555-1234
-address: |
-  **Grace Church**  
-  123 Faith Street  
-  Port Orange, FL 32129
-form_heading: "Send Us a Message"
+address: |-
+  **Comunidad de Fe**\
+  1000 main St,\
+  Davenport, FL,\
+  United States, 33897
+form_heading: Send Us a Message
 ---
-testing updating the contact info manually
+ Thank you for connecting with us!
