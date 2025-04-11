@@ -1,1 +1,14 @@
-{"church_name":"Church Name","site_title":"Church Website","site_description":"A welcoming Christian church community","contact_email":"info@yourchurch.org","contact_phone":"(123) 456-7890","address":"123 Main St, Anytown, USA","maps_url":"https://maps.google.com","social_links":{"facebook":"#","instagram":"#","youtube":"#"}}
+{
+  "church_name": "Comunidad de Fe",
+  "site_title": "Comunidad de Fe",
+  "site_description": "A welcoming Spanish-English speaking Christian church community.",
+  "contact_email": "iglesiacdfe@outlook.com",
+  "contact_phone": "",
+  "address": "1000 Main St, Davenport, FL 33897",
+  "maps_url": "https://maps.app.goo.gl/fPkBPimTu1sHwRvm6",
+  "social_links": {
+    "facebook": "https://www.facebook.com/ComunidaddefeIMU2021",
+    "instagram": "https://www.facebook.com/ComunidaddefeIMU2021",
+    "youtube": "https://www.facebook.com/ComunidaddefeIMU2021"
+  }
+}
