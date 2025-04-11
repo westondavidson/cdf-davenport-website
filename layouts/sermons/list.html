@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section class="sermons-list">
+  <div class="sermons-header">
+    <p>Listen to our latest messages and series</p>
+  </div>
+
+  {{ if eq (len .Pages) 0 }}
+    <div class="no-content-message">
+      <p>No sermons have been published yet. Please check back soon for new content.</p>
+    </div>
+  {{ else }}
+    <div class="sermon-grid">
+      {{ range .Pages.ByDate.Reverse }}
+        <div class="sermon-card">
+          {{ if .Params.image }}
+            <div class="sermon-image">
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+            </div>
+          {{ else }}
+            <div class="sermon-image sermon-fallback-image">
+              <img src="/uploads/default-sermon.jpg" alt="{{ .Title }}" loading="lazy">
+            </div>
+          {{ end }}
+          
+          <div class="sermon-content">
+            <span class="sermon-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+            <h2>{{ .Title }}</h2>
+            <p class="sermon-speaker">{{ .Params.speaker }}</p>
+            <p class="sermon-summary">{{ .Summary }}</p>
+            <a href="{{ .RelPermalink }}" class="btn btn-primary">Listen Now</a>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</section>
+{{ end }} 

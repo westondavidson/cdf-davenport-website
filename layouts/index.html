@@ -1,0 +1,145 @@
+{{ define "main" }}
+
+<!-- Mission & Welcome Section -->
+<section class="section section-welcome" id="main-content">
+  <div class="welcome-container">
+    <div class="welcome-text">
+      <h2>Welcome to Our Church</h2>
+      {{ .Params.welcome_message | markdownify }}
+      <div class="welcome-cta">
+        <a href="/about" class="btn btn-primary">Learn More About Us</a>
+      </div>
+    </div>
+    <div class="welcome-image">
+      <img src="{{ .Params.welcome_image | default "/images/welcome.jpg" }}" alt="Welcome to our church" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- Service Info Section -->
+<section class="section section-services">
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2" ry="2"></rect><line x1="16" y1="3" x2="16" y2="7"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="4" y1="11" x2="20" y2="11"></line><line x1="11" y1="15" x2="12" y2="15"></line><line x1="12" y1="15" x2="12" y2="18"></line></svg>
+      </div>
+      <h3>Service Times</h3>
+      <p>{{ .Params.service_times }}</p>
+    </div>
+    
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      </div>
+      <h3>Location</h3>
+      <p>{{ .Params.location }}</p>
+      <a href="{{ site.Data.site_settings.maps_url }}" target="_blank" rel="noopener noreferrer" class="link-arrow">Get Directions <span>&rarr;</span></a>
+    </div>
+    
+    <div class="service-card">
+      <div class="service-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+      </div>
+      <h3>Contact Us</h3>
+      <p>Have questions? We're here to help!</p>
+      <a href="/contact" class="link-arrow">Get in Touch <span>&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="section section-cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Join Our Community</h2>
+      <p>We invite you to become part of our church family. Everyone is welcome!</p>
+      <div class="cta-buttons">
+        {{ range .Params.cta_buttons }}
+          <a href="{{ .link }}" class="btn {{ if .primary }}btn-primary{{ else }}btn-secondary{{ end }}">{{ .text }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Events & News Section -->
+<section class="section section-featured">
+  <div class="section-header">
+    <h2>Upcoming Events</h2>
+    <a href="/events" class="view-all">View All Events <span>&rarr;</span></a>
+  </div>
+  
+  <div class="featured-grid">
+    {{ range first 3 (where .Site.RegularPages "Section" "events") }}
+    <div class="event-card">
+      {{ with .Params.image }}
+      <div class="event-image">
+        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+      </div>
+      {{ end }}
+      <div class="event-content">
+        <span class="event-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary }}</p>
+        <a href="{{ .RelPermalink }}" class="link-arrow">Learn More <span>&rarr;</span></a>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- Carousel Section -->
+<section class="section section-carousel">
+  <div class="container">
+    <div class="home-carousel">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          {{ range .Params.carousel_images }}
+          <div class="swiper-slide">
+            <img src="{{ .image }}" alt="{{ if .title }}{{ .title }}{{ else }}Church Activity{{ end }}">
+            {{ if .description }}<div class="slide-caption">{{ .description }}</div>{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        <!-- Pagination and Navigation Controls -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Sermon Section -->
+<section class="section section-sermon">
+  <div class="section-header">
+    <h2>Latest Sermon</h2>
+    <a href="/sermons" class="view-all">View All Sermons <span>&rarr;</span></a>
+  </div>
+  
+  {{ with first 1 (where .Site.RegularPages "Section" "sermons") }}
+  {{ range . }}
+  <div class="sermon-preview">
+    <div class="sermon-content">
+      <h3>{{ .Title }}</h3>
+      <span class="sermon-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      <p>{{ .Summary }}</p>
+      <a href="{{ .RelPermalink }}" class="btn btn-primary">Watch Now</a>
+    </div>
+    {{ with .Params.image }}
+    <div class="sermon-thumbnail">
+      <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+  {{ else }}
+  <div class="sermon-preview">
+    <div class="sermon-content">
+      <h3>No sermons available yet</h3>
+      <p>Check back soon for our latest messages.</p>
+    </div>
+  </div>
+  {{ end }}
+</section>
+{{ end }}

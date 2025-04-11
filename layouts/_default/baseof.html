@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ site.Data.site_settings.site_title }}</title>
+  
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ site.Data.site_settings.site_description }}{{ end }}{{ end }}">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Data.site_settings.site_title }}{{ else }}{{ .Title }} | {{ site.Data.site_settings.site_title }}{{ end }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ site.Data.site_settings.site_description }}{{ end }}{{ end }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  
+  <!-- Prefetch DNS for external resources -->
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/css/main.css" as="style">
+  <link rel="preload" href="/js/mobile-menu.js" as="script">
+  
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="{{ with .Section }}section-{{ . }}{{ else }}section-home{{ end }}">
+  
+  {{ partial "header.html" . }}
+
+  <!-- Hero Section: This will appear on all pages -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.hero_subtext }}
+          <p>{{ . }}</p>
+        {{ end }}
+        {{ with .Params.hero_cta }}
+          <div class="hero-cta">
+            <a href="{{ .url }}" class="btn btn-primary">{{ .text }}</a>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  
+  <main id="main-content">
+    <div class="container">
+      {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+  
+  {{ partial "footer.html" . }}
+  
+  <!-- Scripts -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="/js/mobile-menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var swiperElements = document.querySelectorAll('.swiper-container');
+      
+      if (swiperElements.length > 0) {
+        // Initialize with better performance options
+        var swiper = new Swiper('.swiper-container', {
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          // Responsive settings
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 10
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 20
+            },
+            1024: {
+              slidesPerView: 1,
+              spaceBetween: 30
+            }
+          },
+          // Prevent layout shifts
+          preventInteractionOnTransition: true,
+          autoHeight: false,
+          speed: 600, // Slightly slower for smoother transitions
+          // Hardware acceleration
+          hardware: true,
+          // Reduced observer activity to prevent stuttering
+          observer: true,
+          observeParents: true,
+          observeSlideChildren: false,
+          resizeObserver: false
+        });
+      }
+    });
+  </script>
+  
+  <!-- Netlify Identity Redirect -->
+  <script>
+    if (window.netlifyIdentity) {
+      // Check for recovery token or invite token
+      const hash = window.location.hash;
+      const token = hash.match(/#invite_token=([^&]+)/) || hash.match(/#recovery_token=([^&]+)/);
+      
+      if (token && token.length > 1 && token[1]) {
+        // If this is an invite or recovery, redirect to the admin page
+        window.localStorage.setItem('netlifySiteURL', window.location.href.split('#')[0]);
+        window.location.replace('/admin/#' + hash.slice(1));
+      }
+      
+      // Handle login status changes
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

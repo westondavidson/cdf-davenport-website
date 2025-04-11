@@ -1,0 +1,47 @@
+/* 
+  main.css 
+  Description: Main entry point for all CSS styles
+*/
+
+/* First import base/reset styles to establish foundation */
+@import url('base.css');
+
+/* Next import layout styles (layout.css will be merged into layouts.css) */
+@import url('layouts.css');
+
+/* Import component styles */
+@import url('components.css');
+
+/* Import page-specific styles */
+@import url('pages.css');
+
+/* Import responsive styles last (so they can override other styles) */
+@import url('responsive.css');
+
+/* 
+  Note: layout.css will be merged into layouts.css for better organization
+  and to prevent conflicts between similar selectors across files.
+  
+  The files are imported in a specific order for proper cascading:
+  1. Base styles (resets, typography, etc.)
+  2. Layout styles (structural elements)
+  3. Component styles (reusable UI elements)
+  4. Page-specific styles (unique page layouts)
+  5. Responsive styles (media queries, must be last)
+*/
+
+/* The following styles have been removed as they exist in other CSS files:
+   - Reset & base styles (moved to base.css)
+   - HTML/body styles (moved to base.css)
+   - Focus styles (moved to base.css)
+   - Body flex styles (moved to base.css)
+   - Main element styles (moved to base.css)
+   - Basic element styles (img, a tags) (moved to base.css)
+   - Skip-link styles (moved to base.css)
+   - Header & navigation styles (moved to components.css)
+   - Hero section styles (moved to components.css)
+   - Info cards section styles (moved to components.css)
+   - Location & time section styles (moved to components.css)
+   - Home info sections (moved to layouts.css)
+   - Responsive media queries (moved to responsive.css)
+*/

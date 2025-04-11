@@ -1,0 +1,26 @@
+{{ define "main" }}
+<section class="contact">
+  <section class="about-intro">
+    <!-- Removed duplicate h1 title here -->
+  </section>
+  <div class="contact-details">
+    {{ if .Params.email }}
+      <p>Email: <a href="mailto:{{ .Params.email }}">{{ .Params.email }}</a></p>
+    {{ end }}
+    {{ if .Params.phone }}
+      <p>Phone: <a href="tel:{{ .Params.phone }}">{{ .Params.phone }}</a></p>
+    {{ end }}
+    {{ if .Params.address }}
+      <div class="address">
+        <h2>Our Address</h2>
+        {{ .Params.address | markdownify }}
+      </div>
+    {{ end }}
+  </div>
+  {{ if .Content }}
+    <div class="contact-body">
+      {{ .Content }}
+    </div>
+  {{ end }}
+</section>
+{{ end }}

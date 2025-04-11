@@ -1,0 +1,26 @@
+# ------------------------------
+# Hugo Build Outputs
+# ------------------------------
+public/
+resources/
+.hugo_build.lock
+
+# ------------------------------
+# Node/JS Dependencies (if any)
+# ------------------------------
+node_modules/
+package-lock.json
+yarn.lock
+
+# ------------------------------
+# System Files
+# ------------------------------
+.DS_Store
+Thumbs.db
+
+
+# ------------------------------
+# Editor/IDE Settings
+# ------------------------------
+.vscode/
+.idea/

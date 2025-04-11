@@ -1,0 +1,39 @@
+{{ define "main" }}
+<section class="events-list">
+  <div class="sermons-header">
+    <p>Join us for our upcoming events and gatherings</p>
+  </div>
+
+  {{ if eq (len .Pages) 0 }}
+    <div class="no-content-message">
+      <p>No events scheduled at this time. Please check back soon for upcoming events!</p>
+    </div>
+  {{ else }}
+    <div class="events-grid">
+      {{ range .Pages.ByDate }}
+        <div class="event-card">
+          {{ if .Params.image }}
+            <div class="event-image">
+              <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+            </div>
+          {{ else }}
+            <div class="event-image event-fallback-image">
+              <img src="/uploads/default-hero-image.jpg" alt="{{ .Title }}" loading="lazy">
+            </div>
+          {{ end }}
+          
+          <div class="event-content">
+            <span class="event-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+            <h2>{{ .Title }}</h2>
+            {{ if .Params.time }}<p class="event-time">{{ .Params.time }}</p>{{ end }}
+            {{ if .Params.location }}<p class="event-location">{{ .Params.location }}</p>{{ end }}
+            <p class="event-summary">{{ .Summary }}</p>
+            <a href="{{ .RelPermalink }}" class="btn btn-primary">Event Details</a>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</section>
+{{ end }}
+
