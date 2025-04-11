@@ -2,9 +2,8 @@
 title: About
 intro: We exist to glorify God and make disciples of Jesus Christ.
 hero_subtext: Learn about us
-mission: |
-  At Grace Church, our mission is to proclaim the Gospel, 
-  disciple believers, and serve the community for the glory of God.
+mission: At Comunidad de Fe, our mission is to proclaim the Gospel, disciple
+  believers, and serve the community for the glory of God.
 leadership:
   - name: Fernando Malave
     role: Lead Pastor
