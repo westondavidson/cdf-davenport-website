@@ -130,7 +130,12 @@ collections:
         name: "contact"
         fields:
           - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Layout", name: "layout", widget: "string", default: "contact" }
+          - { label: "Type", name: "type", widget: "string", default: "contact" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "Address", name: "address", widget: "markdown" }
           - { label: "Form Heading", name: "form_heading", widget: "string", required: false }
+          - { label: "Body", name: "body", widget: "markdown" }
 
 # Last updated: Force reload of config
