@@ -8,7 +8,7 @@ welcome_message: |-
   Our mission is to glorify God by making disciples of Jesus.  
 
   Service is held in both English and Spanish, all are welcome to join.
-welcome_image: /uploads/church_default_welcome.jpg
+welcome_image: /uploads/comunidad1.jpg
 service_times: Bible Studies on Sunday 10:00AM | Services on Sunday 11:00AM
 location: Services are held at the Florida Camp Inn Recreation Center, located
   at 1000 Main St Davenport, FL 33897
