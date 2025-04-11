@@ -12,8 +12,7 @@ leadership:
     photo: ""
   - name: Dory Gomez
     role: Worship Director
-    bio: >
-      Jane leads the worship team with a passion for lifting up the name of
+    bio: Dory leads the worship team with a passion for lifting up the name of
       Jesus.
     photo: ""
 layout: about
