@@ -14,7 +14,7 @@ leadership:
     bio: Dory leads the worship team with a passion for lifting up the name of
       Jesus.
     photo: /uploads/dory.jpg
-  - name: May Matias
+  - name: Maybeth Matias
     role: Children's Ministry Leader
     photo: /uploads/may-youth-director.jpg
     bio: May has a strong passion for teaching children the Word of God.
