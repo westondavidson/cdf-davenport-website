@@ -1,7 +1,9 @@
 ---
 title: Welcome to Comunidad de Fe (Community of Faith)
 hero_heading: A Place to Grow in Christ
-hero_subtext: Join us in worship, community, and service.
+hero_subtext: |-
+  Join us in worship, community, and service.
+  ¡Cristo es el Señor de nuestras vidas, a el sea la gloria!
 hero_image: /uploads/default-hero-image.jpg
 welcome_message: |-
   We are a Christ-centered community church located in Davenport, FL. 
