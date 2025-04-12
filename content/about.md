@@ -18,6 +18,14 @@ leadership:
     role: Children's Ministry Leader
     photo: /uploads/may-youth-director.jpg
     bio: May has a strong passion for teaching children the Word of God.
+  - name: Enrique Lebron
+    role: Worship Team - Bassist
+    photo: /uploads/enrique.jpg
+    bio: " Kike loves using his musical talents to praise the Lord!"
+  - name: Gigi Morell
+    role: Worship Team - Vocalist
+    photo: /uploads/gigi-morell.jpg
+    bio: Gigi loves using her talent for singing to praise the Lord!
 layout: about
 beliefs: |
   We believe:
