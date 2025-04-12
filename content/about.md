@@ -26,6 +26,11 @@ leadership:
     role: Worship Team - Vocalist
     photo: /uploads/gigi-morell.jpg
     bio: Gigi loves using her talent for singing to praise the Lord!
+  - name: Ithamar Malave
+    role: Technology Director
+    photo: /uploads/ithamar.jpg
+    bio: Itha serves on the team with her talents in audio/visual setup for services
+      and events.
 layout: about
 beliefs: |
   We believe:
