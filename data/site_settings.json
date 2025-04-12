@@ -1,15 +1,15 @@
 {
-  "church_name": "Comunidad de Fe",
   "site_title": "Comunidad de Fe",
+  "church_name": "Comunidad de Fe",
   "site_description": "A welcoming Spanish-English speaking Christian church community.\n¡Cristo es el Señor de nuestras vidas, a el sea la gloria!",
-  "social_image": "/uploads/church-social-image.jpg",
-  "contact_email": "iglesiacdfe@outlook.com",
-  "contact_phone": "",
-  "address": "1000 Main St, Davenport, FL 33897",
-  "maps_url": "https://maps.app.goo.gl/fPkBPimTu1sHwRvm6",
   "social_links": {
     "facebook": "https://www.facebook.com/ComunidaddefeIMU2021",
     "instagram": "https://www.facebook.com/ComunidaddefeIMU2021",
     "youtube": "https://www.facebook.com/ComunidaddefeIMU2021"
-  }
+  },
+  "maps_url": "https://maps.app.goo.gl/fPkBPimTu1sHwRvm6",
+  "social_image": "/uploads/comunidad1.jpg",
+  "contact_phone": "",
+  "address": "1000 Main St, Davenport, FL 33897",
+  "contact_email": "iglesiacdfe@outlook.com"
 }
