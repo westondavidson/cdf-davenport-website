@@ -30,4 +30,27 @@
       </div>
     </div>
     
+    <div class="copyright">
+      <p>&copy; {{ now.Format "2006" }} {{ site.Data.site_settings.church_name }}. All rights reserved.</p>
+    </div>
+  </div>
+  
+  <!-- Google Translate Scripts -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          includedLanguages: 'en,es', // English and Spanish only
+          layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+          autoDisplay: false,
+          gaTrack: false,
+          gaId: ''
+        },
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</footer>
   

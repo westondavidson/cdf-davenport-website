@@ -5,29 +5,35 @@
         <span>{{ site.Data.site_settings.church_name }}</span>
       </a>
       
-      <button class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="main-navigation">
-        <span class="hamburger"></span>
-      </button>
+      <div class="nav-wrapper">
+        <button class="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="main-navigation">
+          <span class="hamburger"></span>
+        </button>
+        
+        <nav id="main-navigation" aria-label="Main Navigation">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="/" class="nav-link {{ if eq .RelPermalink "/" }}active{{ end }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="/about" class="nav-link {{ if hasPrefix .RelPermalink "/about" }}active{{ end }}">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="/sermons" class="nav-link {{ if hasPrefix .RelPermalink "/sermons" }}active{{ end }}">Sermons</a>
+            </li>
+            <li class="nav-item">
+              <a href="/events" class="nav-link {{ if hasPrefix .RelPermalink "/events" }}active{{ end }}">Events</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact" class="nav-link {{ if hasPrefix .RelPermalink "/contact" }}active{{ end }}">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
       
-      <nav id="main-navigation" aria-label="Main Navigation">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="/" class="nav-link {{ if eq .RelPermalink "/" }}active{{ end }}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="/about" class="nav-link {{ if hasPrefix .RelPermalink "/about" }}active{{ end }}">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="/sermons" class="nav-link {{ if hasPrefix .RelPermalink "/sermons" }}active{{ end }}">Sermons</a>
-          </li>
-          <li class="nav-item">
-            <a href="/events" class="nav-link {{ if hasPrefix .RelPermalink "/events" }}active{{ end }}">Events</a>
-          </li>
-          <li class="nav-item">
-            <a href="/contact" class="nav-link {{ if hasPrefix .RelPermalink "/contact" }}active{{ end }}">Contact</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="right-header">
+        <div id="google_translate_element" class="language-selector"></div>
+      </div>
     </div>
   </div>
 </header>
