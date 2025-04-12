@@ -1,0 +1,284 @@
+{{ define "main" }}
+<div class="tithing-page">
+  <div class="tithing-content">
+    <!-- Giving Text Section -->
+    <section class="giving-text-section">
+      <div class="section-content">
+        <h2>Giving & Tithing</h2>
+        <div class="giving-text">
+          {{ .Params.giving_text | markdownify }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Stripe Payment Link Section -->
+    <section class="payment-section">
+      <div class="section-content">
+        <h2>Give Online</h2>
+        
+        <div class="stripe-container">
+          <div class="payment-options">
+            <!-- Donation Options -->
+            <div class="donation-options">
+              <h3>Choose a Giving Option:</h3>
+              
+              <div class="donation-buttons">
+                <a href="#" class="donation-button" id="tithe-button">
+                  <div class="button-inner">
+                    <h4>Tithe</h4>
+                    <p>Regular giving (10% of income)</p>
+                  </div>
+                </a>
+                
+                <a href="#" class="donation-button" id="offering-button">
+                  <div class="button-inner">
+                    <h4>Offering</h4>
+                    <p>General church support</p>
+                  </div>
+                </a>
+                
+                <a href="#" class="donation-button" id="missions-button">
+                  <div class="button-inner">
+                    <h4>Missions</h4>
+                    <p>Support mission work</p>
+                  </div>
+                </a>
+                
+                <a href="#" class="donation-button" id="building-button">
+                  <div class="button-inner">
+                    <h4>Building Fund</h4>
+                    <p>Support facility improvements</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            
+            <!-- Replace these links with your actual Stripe payment links -->
+            <div class="stripe-payment-links">
+              <!-- This will be shown when a donation type is selected -->
+              <div id="stripe-payment-link" style="display: none;">
+                <div class="payment-link-container">
+                  <h3 id="selected-fund-title">Selected Fund</h3>
+                  <p id="selected-fund-description">Fund description appears here</p>
+                  
+                  <!-- Placeholder for Stripe payment button - replace with your actual button -->
+                  <a href="PASTE_YOUR_STRIPE_PAYMENT_LINK_HERE" target="_blank" class="stripe-button">
+                    <span class="button-text">Give via Stripe</span>
+                    <svg class="stripe-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.5 4C8.33 4 5 7.33 5 11.5C5 15.67 8.33 19 12.5 19C16.67 19 20 15.67 20 11.5C20 7.33 16.67 4 12.5 4ZM12.5 17.5C9.19 17.5 6.5 14.81 6.5 11.5C6.5 8.19 9.19 5.5 12.5 5.5C15.81 5.5 18.5 8.19 18.5 11.5C18.5 14.81 15.81 17.5 12.5 17.5ZM13.5 9.5H11.5V13.5H13.5V9.5Z" fill="white"/>
+                    </svg>
+                  </a>
+                  
+                  <div class="payment-note">
+                    <p>You'll be redirected to Stripe's secure payment page</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="other-giving-methods">
+          <h3>Other Ways to Give</h3>
+          <p>If you prefer, you can also give in person during our Sunday services or by mailing a check to our church office.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all donation buttons
+    const donationButtons = document.querySelectorAll('.donation-button');
+    const stripePaymentLink = document.getElementById('stripe-payment-link');
+    const selectedFundTitle = document.getElementById('selected-fund-title');
+    const selectedFundDescription = document.getElementById('selected-fund-description');
+    
+    // Fund descriptions
+    const fundDetails = {
+      'tithe-button': {
+        title: 'Tithe',
+        description: 'Your regular tithe (10% of income) supports our church\'s ongoing ministry.',
+        // You would add your specific Stripe link for each fund type
+        stripeLink: 'PASTE_YOUR_TITHE_STRIPE_PAYMENT_LINK_HERE'
+      },
+      'offering-button': {
+        title: 'General Offering',
+        description: 'Support our church\'s general operations and ministry needs.',
+        stripeLink: 'PASTE_YOUR_OFFERING_STRIPE_PAYMENT_LINK_HERE'
+      },
+      'missions-button': {
+        title: 'Missions Fund',
+        description: 'Support our local and global mission work spreading the Gospel.',
+        stripeLink: 'PASTE_YOUR_MISSIONS_STRIPE_PAYMENT_LINK_HERE'
+      },
+      'building-button': {
+        title: 'Building Fund',
+        description: 'Help us maintain and improve our church facilities.',
+        stripeLink: 'PASTE_YOUR_BUILDING_FUND_STRIPE_PAYMENT_LINK_HERE'
+      }
+    };
+    
+    // Add click event to each donation button
+    donationButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Remove active class from all buttons
+        donationButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Update the fund details
+        const fundId = this.id;
+        if (fundDetails[fundId]) {
+          selectedFundTitle.textContent = fundDetails[fundId].title;
+          selectedFundDescription.textContent = fundDetails[fundId].description;
+          
+          // Update the Stripe payment link
+          const stripeButton = document.querySelector('.stripe-button');
+          if (stripeButton) {
+            stripeButton.href = fundDetails[fundId].stripeLink;
+          }
+          
+          // Show the payment link section
+          stripePaymentLink.style.display = 'block';
+          
+          // Scroll to the payment section
+          stripePaymentLink.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .tithing-page {
+    padding: 2rem 0;
+  }
+  
+  .section-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  
+  .giving-text {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .stripe-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .donation-options h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .donation-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .donation-button {
+    display: block;
+    background-color: #ffffff;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: #343a40;
+    transition: all 0.3s ease;
+  }
+  
+  .donation-button:hover, .donation-button.active {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+    transform: translateY(-3px);
+  }
+  
+  .donation-button.active {
+    background-color: #f8f9ff;
+  }
+  
+  .button-inner h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: #007bff;
+  }
+  
+  .button-inner p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .stripe-payment-links {
+    margin-top: 2rem;
+  }
+  
+  .payment-link-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .stripe-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6772e5; /* Stripe color */
+    color: white;
+    font-weight: 600;
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  
+  .stripe-button:hover {
+    background-color: #5469d4;
+  }
+  
+  .button-text {
+    margin-right: 0.5rem;
+  }
+  
+  .payment-note {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  
+  .other-giving-methods {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .other-giving-methods h3 {
+    margin-bottom: 1rem;
+  }
+  
+  .other-giving-methods p {
+    color: #6c757d;
+  }
+</style>
+{{ end }} 
