@@ -26,6 +26,15 @@
   <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ site.Data.site_settings.site_description }}{{ end }}{{ end }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ with .Params.image }}{{ . | absURL }}{{ else }}{{ site.Data.site_settings.social_image | absURL }}{{ end }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Data.site_settings.site_title }}{{ else }}{{ .Title }} | {{ site.Data.site_settings.site_title }}{{ end }}">
+  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ site.Data.site_settings.site_description }}{{ end }}{{ end }}">
+  <meta name="twitter:image" content="{{ with .Params.image }}{{ . | absURL }}{{ else }}{{ site.Data.site_settings.social_image | absURL }}{{ end }}">
   
   <!-- Prefetch DNS for external resources -->
   <link rel="dns-prefetch" href="https://unpkg.com">
