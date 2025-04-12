@@ -7,13 +7,13 @@ mission: At Comunidad de Fe, our mission is to proclaim the Gospel, disciple
 leadership:
   - name: Fernando Malave
     role: Lead Pastor
-    bio: He has a heart for expository preaching and discipleship.
-    photo: ""
+    bio: Pastor Fernando has a heart for expository preaching and discipleship.
+    photo: /uploads/1.jpg
   - name: Dory Gomez
     role: Worship Director
     bio: Dory leads the worship team with a passion for lifting up the name of
       Jesus.
-    photo: ""
+    photo: /uploads/dory.jpg
   - name: May Matias
     role: Children's Ministry Leader
     photo: /uploads/may-youth-director.jpg
