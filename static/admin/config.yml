@@ -7,7 +7,7 @@ public_folder: "/uploads"
 
 locale: 'en'
 
-site_url: https://church-website-template.netlify.app/
+site_url: https://cdfdavenport.com
 
 collections:
   - name: "settings"
@@ -138,5 +138,29 @@ collections:
           - { label: "Address", name: "address", widget: "markdown" }
           - { label: "Form Heading", name: "form_heading", widget: "string", required: false }
           - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "tithing"
+    label: "Tithing Page"
+    files:
+      - file: "content/tithing.md"
+        label: "Tithing"
+        name: "tithing"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Intro", name: "intro", widget: "string", required: false }
+          - { label: "Hero Subtext", name: "hero_subtext", widget: "string", required: false }
+          - { label: "Layout", name: "layout", widget: "string", default: "tithing" }
+          - { label: "Type", name: "type", widget: "string", default: "tithing" }
+          - { label: "Giving Text", name: "giving_text", widget: "markdown" }
+          - label: "Donation Buttons"
+            name: "donation_buttons"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Short slug like 'tithe' or 'missions'" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Stripe Link", name: "stripe_link", widget: "string" }
+              - { label: "Button Label", name: "button_label", widget: "string", required: false }
 
 # Last updated: Force reload of config

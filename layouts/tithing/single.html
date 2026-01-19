@@ -23,21 +23,14 @@
               <h3>Choose a Giving Option:</h3>
               
               <div class="donation-buttons">
-                <a href="#" class="donation-button" id="tithe-button">
+                {{ range .Params.donation_buttons }}
+                <a href="#" class="donation-button" data-fund-id="{{ .id }}">
                   <div class="button-inner">
-                    <h4>Tithe</h4>
-                    <p>Regular giving</p>
+                    <h4>{{ .title }}</h4>
+                    {{ if .subtitle }}<p>{{ .subtitle }}</p>{{ end }}
                   </div>
                 </a>
-                
-                <a href="#" class="donation-button" id="missions-button">
-                  <div class="button-inner">
-                    <h4>Missions</h4>
-                    <p>Support mission work</p>
-                  </div>
-                </a>
-
-                </a>
+                {{ end }}
               </div>
             </div>
             
@@ -50,7 +43,7 @@
                   <p id="selected-fund-description">Fund description appears here</p>
                   
                   <!-- Placeholder for Stripe payment button - replace with your actual button -->
-                  <a href="PASTE_YOUR_STRIPE_PAYMENT_LINK_HERE" target="_blank" class="stripe-button">
+                  <a href="#" target="_blank" class="stripe-button">
                     <span class="button-text">Give via Stripe</span>
                     <svg class="stripe-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12.5 4C8.33 4 5 7.33 5 11.5C5 15.67 8.33 19 12.5 19C16.67 19 20 15.67 20 11.5C20 7.33 16.67 4 12.5 4ZM12.5 17.5C9.19 17.5 6.5 14.81 6.5 11.5C6.5 8.19 9.19 5.5 12.5 5.5C15.81 5.5 18.5 8.19 18.5 11.5C18.5 14.81 15.81 17.5 12.5 17.5ZM13.5 9.5H11.5V13.5H13.5V9.5Z" fill="white"/>
@@ -83,20 +76,11 @@
     const selectedFundTitle = document.getElementById('selected-fund-title');
     const selectedFundDescription = document.getElementById('selected-fund-description');
     
-    // Fund descriptions
-    const fundDetails = {
-      'tithe-button': {
-        title: 'Tithe',
-        description: 'Your regular tithing supports our church\'s ongoing ministry.',
-        // You would add your specific Stripe link for each fund type
-        stripeLink: 'PASTE_YOUR_TITHE_STRIPE_PAYMENT_LINK_HERE'
-      },
-      'missions-button': {
-        title: 'Missions Fund',
-        description: 'Support our local and global mission work spreading the Gospel.',
-        stripeLink: 'PASTE_YOUR_MISSIONS_STRIPE_PAYMENT_LINK_HERE'
-      }
-    };
+    const fundList = {{ .Params.donation_buttons | default (slice) | jsonify | safeJS }};
+    const fundDetails = fundList.reduce((acc, fund) => {
+      acc[fund.id] = fund;
+      return acc;
+    }, {});
     
     // Add click event to each donation button
     donationButtons.forEach(button => {
@@ -110,15 +94,19 @@
         this.classList.add('active');
         
         // Update the fund details
-        const fundId = this.id;
+        const fundId = this.dataset.fundId;
         if (fundDetails[fundId]) {
           selectedFundTitle.textContent = fundDetails[fundId].title;
           selectedFundDescription.textContent = fundDetails[fundId].description;
           
           // Update the Stripe payment link
           const stripeButton = document.querySelector('.stripe-button');
+          const stripeButtonText = document.querySelector('.stripe-button .button-text');
           if (stripeButton) {
-            stripeButton.href = fundDetails[fundId].stripeLink;
+            stripeButton.href = fundDetails[fundId].stripe_link;
+          }
+          if (stripeButtonText) {
+            stripeButtonText.textContent = fundDetails[fundId].button_label || 'Give via Stripe';
           }
           
           // Show the payment link section
