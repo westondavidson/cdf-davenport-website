@@ -28,5 +28,5 @@ donation_buttons:
       bank, or enter the church's email address Comunidaddefe21@gmail.com as the
       recipient in your Zelle app.
     stripe_link: PASTE_YOUR_MISSIONS_STRIPE_PAYMENT_LINK_HERE
-    button_label: Give via Stripe
+    button_label: Give via Zelle
 ---
