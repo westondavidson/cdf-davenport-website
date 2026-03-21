@@ -22,8 +22,8 @@ donation_buttons:
     stripe_link: https://venmo.com/?txn=pay&recipients=comunidaddefe21@gmail.com
     button_label: Give through Venmo
   - id: Zelle
-    title: Tithe using Zelle
-    subtitle: Regular giving
+    title: Zelle
+    subtitle: Tithe using Zelle
     description: Please scan the QR code to be directed to give via Zelle using your
       bank, or enter the church's email address Comunidaddefe21@gmail.com as the
       recipient in your Zelle app.
