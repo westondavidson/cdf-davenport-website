@@ -4,7 +4,7 @@ intro: Support our ministry and contribute to God's work
 hero_subtext: Give Online
 layout: tithing
 type: tithing
-giving_text: >
+giving_text: >-
   "Each of you should give what you have decided in your heart to give, not
   reluctantly or under compulsion, for God loves a cheerful giver." - 2
   Corinthians 9:7
