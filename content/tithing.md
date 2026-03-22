@@ -31,7 +31,10 @@ donation_buttons:
     payment_steps:
       - Open your bank app or Zelle.
       - Select Send Money with Zelle.
-      - Enter Comunidaddefe21@gmail.com as the recipient.
+      - Enter Comunidaddefe21@gmail.com as the recipient or scan the QR code
+        above to add the church as a recipient.
       - Add your tithe or offering amount and submit the payment.
-    payment_note: Add a note such as Tithe, Offering, or Missions so the gift can be categorized correctly.
+    payment_note: Add a note such as Tithe, Offering, or Missions so the gift can be
+      categorized correctly.
+    qr_code: /uploads/f7cca214-2165-4a14-a2da-90f830d5f690.jpg
 ---
