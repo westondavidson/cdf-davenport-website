@@ -11,12 +11,12 @@
       </div>
     </section>
 
-    <!-- Stripe Payment Link Section -->
+    <!-- Payment Methods Section -->
     <section class="payment-section">
       <div class="section-content">
         <h2>Give Online</h2>
         
-        <div class="stripe-container">
+        <div class="payment-methods-container">
           <div class="payment-options">
             <!-- Donation Options -->
             <div class="donation-options">
@@ -34,25 +34,30 @@
               </div>
             </div>
             
-            <!-- Replace these links with your actual Stripe payment links -->
-            <div class="stripe-payment-links">
+            <div class="payment-method-details">
               <!-- This will be shown when a donation type is selected -->
-              <div id="stripe-payment-link" style="display: none;">
+              <div id="payment-method-details" style="display: none;">
                 <div class="payment-link-container">
                   <h3 id="selected-fund-title">Selected Fund</h3>
                   <p id="selected-fund-description">Fund description appears here</p>
-                  
-                  <!-- Placeholder for Stripe payment button - replace with your actual button -->
-                  <a href="#" target="_blank" class="stripe-button">
-                    <span class="button-text">Give via Stripe</span>
+
+                  <div id="payment-qr-wrapper" class="payment-qr-wrapper" style="display: none;">
+                    <img id="payment-qr-image" class="payment-qr-image" src="" alt="" />
+                  </div>
+
+                  <div id="payment-steps-wrapper" class="payment-steps-wrapper" style="display: none;">
+                    <h4>Steps</h4>
+                    <ol id="payment-steps-list" class="payment-steps-list"></ol>
+                  </div>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="payment-action-button" id="payment-action-button" style="display: none;">
+                    <span class="button-text">Give Online</span>
                     <svg class="stripe-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12.5 4C8.33 4 5 7.33 5 11.5C5 15.67 8.33 19 12.5 19C16.67 19 20 15.67 20 11.5C20 7.33 16.67 4 12.5 4ZM12.5 17.5C9.19 17.5 6.5 14.81 6.5 11.5C6.5 8.19 9.19 5.5 12.5 5.5C15.81 5.5 18.5 8.19 18.5 11.5C18.5 14.81 15.81 17.5 12.5 17.5ZM13.5 9.5H11.5V13.5H13.5V9.5Z" fill="white"/>
                     </svg>
                   </a>
-                  
-                  <div class="payment-note">
-                    <p>You'll be redirected to Stripe's secure payment page</p>
-                  </div>
+
+                  <div class="payment-note" id="payment-note" style="display: none;"></div>
                 </div>
               </div>
             </div>
@@ -72,9 +77,16 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Get all donation buttons
     const donationButtons = document.querySelectorAll('.donation-button');
-    const stripePaymentLink = document.getElementById('stripe-payment-link');
+    const paymentMethodDetails = document.getElementById('payment-method-details');
     const selectedFundTitle = document.getElementById('selected-fund-title');
     const selectedFundDescription = document.getElementById('selected-fund-description');
+    const paymentActionButton = document.getElementById('payment-action-button');
+    const paymentActionButtonText = document.querySelector('#payment-action-button .button-text');
+    const paymentQrWrapper = document.getElementById('payment-qr-wrapper');
+    const paymentQrImage = document.getElementById('payment-qr-image');
+    const paymentStepsWrapper = document.getElementById('payment-steps-wrapper');
+    const paymentStepsList = document.getElementById('payment-steps-list');
+    const paymentNote = document.getElementById('payment-note');
     
     const fundList = {{ .Params.donation_buttons | default (slice) | jsonify | safeJS }};
     const fundDetails = fundList.reduce((acc, fund) => {
@@ -96,24 +108,60 @@
         // Update the fund details
         const fundId = this.dataset.fundId;
         if (fundDetails[fundId]) {
-          selectedFundTitle.textContent = fundDetails[fundId].title;
-          selectedFundDescription.textContent = fundDetails[fundId].description;
-          
-          // Update the Stripe payment link
-          const stripeButton = document.querySelector('.stripe-button');
-          const stripeButtonText = document.querySelector('.stripe-button .button-text');
-          if (stripeButton) {
-            stripeButton.href = fundDetails[fundId].stripe_link;
+          const fund = fundDetails[fundId];
+          const paymentLink = fund.payment_link || fund.stripe_link || '';
+
+          selectedFundTitle.textContent = fund.title;
+          selectedFundDescription.textContent = fund.description || '';
+
+          if (paymentLink) {
+            paymentActionButton.href = paymentLink;
+            paymentActionButton.style.display = 'inline-flex';
+            paymentActionButtonText.textContent = fund.button_label || 'Give Online';
+          } else {
+            paymentActionButton.removeAttribute('href');
+            paymentActionButton.style.display = 'none';
           }
-          if (stripeButtonText) {
-            stripeButtonText.textContent = fundDetails[fundId].button_label || 'Give via Stripe';
+
+          if (fund.qr_code) {
+            paymentQrImage.src = fund.qr_code;
+            paymentQrImage.alt = fund.title + ' QR code';
+            paymentQrWrapper.style.display = 'block';
+          } else {
+            paymentQrImage.removeAttribute('src');
+            paymentQrImage.alt = '';
+            paymentQrWrapper.style.display = 'none';
+          }
+
+          if (Array.isArray(fund.payment_steps) && fund.payment_steps.length > 0) {
+            paymentStepsList.innerHTML = '';
+            fund.payment_steps.forEach(step => {
+              const item = document.createElement('li');
+              item.textContent = step;
+              paymentStepsList.appendChild(item);
+            });
+            paymentStepsWrapper.style.display = 'block';
+          } else {
+            paymentStepsList.innerHTML = '';
+            paymentStepsWrapper.style.display = 'none';
+          }
+
+          if (fund.payment_note) {
+            paymentNote.textContent = fund.payment_note;
+            paymentNote.style.display = 'block';
+          } else if (paymentLink) {
+            paymentNote.textContent = 'You\'ll be redirected to a secure payment page.';
+            paymentNote.style.display = 'block';
+          } else {
+            paymentNote.textContent = '';
+            paymentNote.style.display = 'none';
           }
           
-          // Show the payment link section
-          stripePaymentLink.style.display = 'block';
+          // Show the payment details section
+          paymentMethodDetails.style.display = 'block';
           
           // Scroll to the payment section
-          stripePaymentLink.scrollIntoView({ behavior: 'smooth' });
+          paymentMethodDetails.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
@@ -137,7 +185,7 @@
     line-height: 1.6;
   }
   
-  .stripe-container {
+  .payment-methods-container {
     background-color: #f8f9fa;
     border-radius: 8px;
     padding: 2rem;
@@ -191,7 +239,7 @@
     color: #6c757d;
   }
   
-  .stripe-payment-links {
+  .payment-method-details {
     margin-top: 2rem;
   }
   
@@ -203,7 +251,36 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
   
-  .stripe-button {
+  .payment-qr-wrapper {
+    margin: 1.5rem 0;
+  }
+
+  .payment-qr-image {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+  }
+
+  .payment-steps-wrapper {
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+
+  .payment-steps-wrapper h4 {
+    margin-bottom: 0.75rem;
+    color: #007bff;
+  }
+
+  .payment-steps-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #495057;
+    line-height: 1.6;
+  }
+
+  .payment-action-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -217,7 +294,7 @@
     transition: background-color 0.2s;
   }
   
-  .stripe-button:hover {
+  .payment-action-button:hover {
     background-color: #5469d4;
   }
   
@@ -230,7 +307,7 @@
     font-size: 0.9rem;
     margin-top: 1rem;
   }
-  
+
   .other-giving-methods {
     text-align: center;
     margin-top: 2rem;

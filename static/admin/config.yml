@@ -160,7 +160,16 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
               - { label: "Description", name: "description", widget: "text", required: false }
-              - { label: "Stripe Link", name: "stripe_link", widget: "string" }
-              - { label: "Button Label", name: "button_label", widget: "string", required: false }
+              - { label: "Direct Payment Link", name: "payment_link", widget: "string", required: false, hint: "Optional full URL for services like Stripe, PayPal, or Venmo" }
+              - { label: "Legacy Stripe Link", name: "stripe_link", widget: "string", required: false, hint: "Existing field kept for compatibility; prefer Direct Payment Link for new entries" }
+              - { label: "Button Label", name: "button_label", widget: "string", required: false, hint: "Shown only when a direct payment link is available" }
+              - { label: "QR Code Image", name: "qr_code", widget: "image", required: false, hint: "Optional QR code image for apps like Zelle" }
+              - label: "Payment Steps"
+                name: "payment_steps"
+                widget: "list"
+                required: false
+                hint: "Optional step-by-step instructions for payment methods without a direct link"
+                field: { label: "Step", name: "step", widget: "string" }
+              - { label: "Payment Note", name: "payment_note", widget: "text", required: false, hint: "Optional extra note shown under the payment details" }
 
 # Last updated: Force reload of config
