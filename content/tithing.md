@@ -28,6 +28,7 @@ donation_buttons:
     description: Please scan the QR code to be directed to give via Zelle using your
       bank, or enter the church's email address Comunidaddefe21@gmail.com as the
       recipient in your Zelle app.
+    qr_max_width: 420
     payment_steps:
       - Open your bank app or Zelle.
       - Select Send Money with Zelle.

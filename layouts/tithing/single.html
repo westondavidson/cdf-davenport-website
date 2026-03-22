@@ -126,10 +126,12 @@
           if (fund.qr_code) {
             paymentQrImage.src = fund.qr_code;
             paymentQrImage.alt = fund.title + ' QR code';
+            paymentQrImage.style.maxWidth = (fund.qr_max_width || 420) + 'px';
             paymentQrWrapper.style.display = 'block';
           } else {
             paymentQrImage.removeAttribute('src');
             paymentQrImage.alt = '';
+            paymentQrImage.style.maxWidth = '';
             paymentQrWrapper.style.display = 'none';
           }
 
@@ -257,7 +259,7 @@
 
   .payment-qr-image {
     width: 100%;
-    max-width: 260px;
+    max-width: 420px;
     height: auto;
     border-radius: 8px;
     border: 1px solid #e9ecef;
