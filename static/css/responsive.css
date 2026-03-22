@@ -269,10 +269,13 @@ img {
 /* For narrow phones where the logo, translator, and menu no longer fit comfortably on one line */
 @media (max-width: 560px) {
   header .container {
+    display: block;
+    width: 100%;
     padding: 0.75rem 1rem;
   }
 
   .header-content {
+    width: 100%;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "logo toggle"
@@ -280,11 +283,14 @@ img {
     align-items: center;
     row-gap: 0.75rem;
     column-gap: 0.75rem;
+    justify-items: stretch;
   }
 
   header .logo {
     grid-area: logo;
     align-self: center;
+    padding-right: 0.75rem;
+    font-size: clamp(1rem, 4.6vw, 1.2rem);
   }
 
   .header-controls {
@@ -293,30 +299,40 @@ img {
 
   .right-header {
     grid-area: translate;
-    width: 100%;
+    width: auto;
+    min-width: 0;
+    justify-self: start;
   }
 
   .language-selector {
-    width: 100%;
+    width: auto;
   }
 
   .goog-te-gadget {
-    width: 100%;
+    width: auto;
     max-width: none;
   }
 
   .goog-te-gadget .goog-te-combo {
-    width: 100%;
-    max-width: none;
+    width: auto;
+    min-width: 210px;
+    max-width: min(230px, calc(100vw - 2rem));
+    height: 42px !important;
   }
 
   .mobile-menu-toggle {
     grid-area: toggle;
     justify-self: end;
+    align-self: center;
+    margin-right: 0;
   }
 
   #main-navigation {
     top: calc(100% + 0.5rem);
+  }
+
+  .hero {
+    padding-top: 135px;
   }
 }
 
@@ -331,9 +347,9 @@ img {
   }
 
   .goog-te-gadget .goog-te-combo {
-    min-width: 0;
-    max-width: none;
-    width: 100%;
+    min-width: 180px;
+    max-width: min(210px, calc(100vw - 2rem));
+    width: auto;
     padding: 0.42rem 1.75rem 0.42rem 0.6rem !important;
     font-size: 11px !important;
   }
