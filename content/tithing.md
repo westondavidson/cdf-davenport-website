@@ -15,13 +15,6 @@ giving_text: >-
 
   You can choose to give a one-time donation or set up recurring giving.
 donation_buttons:
-  - id: Venmo
-    title: Venmo
-    subtitle: Tithe using Venmo
-    description: Your regular tithing supports our church's ongoing ministry.
-    payment_link: https://venmo.com/?txn=pay&recipients=comunidaddefe21@gmail.com
-    button_label: Give through Venmo
-    payment_note: You'll be redirected to Venmo to complete your gift securely.
   - id: Zelle
     title: Zelle
     subtitle: Tithe using Zelle
